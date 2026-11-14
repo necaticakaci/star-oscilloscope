@@ -276,20 +276,20 @@ in `CreatSbqUsbWave`, `CreatHsfUsbWave`, `CreatJlyUsbWave`):
 What follows:
 - **The whole ISDS205 series** (A/B/C/X) runs the same oscilloscope code, so our driver and application should work on
   all of them unchanged. Only the ISDS205X(1.1) has been tried.
-- Only B and X have the DDS. `ISDS205A`/`ISDS205C` appear nowhere in the library; those models probably report a plain
-  `ISDS205`.
+- Only B and X have the DDS. The driver accepts every model whose name starts with `ISDS205`; how the other models name
+  themselves has not been seen here ❓.
 - The other families (210, 220, 2062, MSO20) would not need a whole new driver: a model-specific acquisition module on
   top of the shared layer (sampling commands, data handling, perhaps another descriptor layout). Someone with such a
   device could write it with the record/fit/verify workflow of [building.md](building.md) §4.
 - The library looks for `D4A2:5661` and `D4A2:5662`; which model is 5662 is not known. The Windows DLL also lists 5640,
-  5650 and 5660.
+  5650 and 5660, and the manufacturer's Windows driver binds 5660–5666.
 
 **In Star Oscilloscope:**
 - The driver opens `D4A2:5661` only. If after the handshake the descriptor's model does not start with `ISDS205`, it
   sends the device nothing and says so ("ISDS210B is not supported: this program drives the ISDS205 series";
   `isds::supported_model`), so another family on the same USB IDs is not driven wrongly.
 - The generator follows the model: on B and X (`has_generator`), amplitude and offset only on X (`has_level_control`):
-  - **No generator** (plain ISDS205, probably A and C): the Generator tab, panel and strip are off; no gain wizard.
+  - **No generator** (ISDS205, 205A, 205C): the Generator tab, panel and strip are off; no gain wizard.
   - **ISDS205B:** Generator on; the amplitude and offset boxes are off and a note says why. The output is not parked at
     0 V, since parking without levels would mean switching the output on for a moment. No gain wizard, which sets its
     DC levels with the DDS offset.
