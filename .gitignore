@@ -1,0 +1,11 @@
+# Build outputs
+build/
+__pycache__/
+*.pyc
+
+# The manufacturer's SDK (licence unclear, not redistributed): download it from https://github.com/instrustar-dev/SDK
+# into SDK-master/ to use the tools that call it (docs/building.md §4).
+SDK-master/
+
+# Recordings of the manufacturer's library made with tools/trace_vdso.sh (docs/building.md §5).
+trace/

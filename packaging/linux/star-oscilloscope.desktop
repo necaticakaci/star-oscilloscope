@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+[Desktop Entry]
+Type=Application
+Name=Star Oscilloscope
+GenericName=Oscilloscope
+GenericName[tr]=Osiloskop
+Comment=Oscilloscope software for the Instrustar ISDS205 series
+Comment[tr]=Instrustar ISDS205 serisi için osiloskop yazılımı
+Exec=star-oscilloscope
+Icon=star-oscilloscope
+Terminal=false
+Categories=Science;Electronics;Engineering;
+Keywords=oscilloscope;scope;spectrum;signal generator;USB;ISDS205;
+Keywords[tr]=osiloskop;spektrum;sinyal jeneratörü;USB;ISDS205;
+StartupWMClass=star-oscilloscope

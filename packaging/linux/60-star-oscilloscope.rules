@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Instrustar ISDS205 series USB oscilloscopes (D4A2:5661): the user at the computer may open them without root.
+# "uaccess" gives the logged-in user of the seat access, so the rule must come before 73-seat-late.rules.
+SUBSYSTEM=="usb", ATTR{idVendor}=="d4a2", ATTR{idProduct}=="5661", TAG+="uaccess"

@@ -1,0 +1,8 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-3.0-or-later
+# After removing: udev forgets the package's rule.
+set -e
+if [ "$1" = remove ] && command -v udevadm >/dev/null 2>&1; then
+    udevadm control --reload-rules || true
+fi
+exit 0

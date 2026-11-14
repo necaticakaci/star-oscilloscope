@@ -1,0 +1,5 @@
+# Linux-first project: keep LF everywhere, also in Windows checkouts.
+* text=auto eol=lf
+*.bin binary
+*.f64 binary
+*.pdf binary
