@@ -1,20 +1,15 @@
 # Star Oscilloscope
 
-Open-source oscilloscope software for the Instrustar ISDS205 series USB oscilloscopes, working through its own USB
-driver, on Linux and Windows. It has a sober, classic instrument look, and its measurements have been checked against
-known sources ([docs/measurements.md](docs/measurements.md)).
+Open-source oscilloscope software for the Instrustar ISDS205 series USB oscilloscopes, working through its own USB driver, on Linux and Windows.
 
-The manufacturer's software runs on Windows only, and sigrok does not support the oscilloscope mode of these devices.
-This project is not affiliated with Instrustar.
+![Star Oscilloscope with an ISDS205X: a sinc pulse on CH1, a square wave on CH2, the front panel on the right](docs/images/oscilloscope.png)
 
 ## Supported devices
 
-The whole ISDS205 series (ISDS205, 205A, 205B, 205C, 205X) uses the same acquisition, so Star Oscilloscope should drive
-all of them ([docs/protocol.md](docs/protocol.md) §10). **It has been tested only with the ISDS205X.** Reports from
-other models are very welcome.
+All models of the ISDS205 series (ISDS205, 205A, 205B, 205C, 205X) use the same acquisition. **Currently it has been tested only with the ISDS205X.** Reports from other models are welcome.
 
 - The signal generator is used on the ISDS205B and ISDS205X; amplitude and offset are set on the ISDS205X only.
-- The switch on the back must be on "Logic" (Multi VirAnalyzer), not "Saleae Logic".
+- The switch on the back must be on "Logic" mode, not "Saleae Logic".
 
 ## Features
 
@@ -33,17 +28,17 @@ other models are very welcome.
   multimeter.
 - Any probe factor (e.g. 10.15), selectable trace colours, a print theme, a front panel with knobs as an alternative to
   the form, CSV export and screenshots, a built-in simulator.
-- Interface in English and Turkish ([docs/translating.md](docs/translating.md)).
+- Multi-language support, currently English and Turkish.
 
 ## Installing
 
-Packages are on the project's Releases page.
+Get the packages from the [Releases page](https://github.com/necaticakaci/star-oscilloscope/releases).
 
-**Windows 10 and 11, 64-bit:** unpack `star-oscilloscope-<version>-windows-x64.zip` into a folder and run
+**Windows 10/11, 64-bit:** unpack `star-oscilloscope-<version>-windows-x64.zip` into a folder and run
 `star-oscilloscope.exe`. Nothing is installed; the folder can be moved. Settings are kept in `%APPDATA%\StarOscilloscope`.
 - The program reaches the device through Windows's WinUSB driver. The manufacturer's software binds it to the device,
   and Device Manager then shows "YiXingDianZi USB DSO(v5) Driver". If the manufacturer's software has never been
-  installed on the computer, install its driver once ([docs/building.md](docs/building.md) §1.2 explains what it is).
+  installed on the computer, install its driver once. See [building.md](docs/building.md#12-building-on-windows-msys2-ucrt64).
 
 **Debian 13, Ubuntu 24.04 and newer:**
 ```bash
@@ -53,8 +48,8 @@ sudo apt install ./star-oscilloscope_<version>_amd64.deb
   a device already plugged in need not be replugged.
 - The program appears in the applications menu as "Star Oscilloscope".
 
-**Other Linux distributions (AppImage):** runs on Debian 13, Ubuntu 24.04 and newer, current Fedora and Arch. Nothing to
-install; make the file executable and run it:
+**Other Linux distributions (AppImage):** needs glibc 2.38 or newer, e.g. Debian 13, Ubuntu 24.04, Fedora, Arch.
+Nothing to install; make the file executable and run it:
 ```bash
 chmod +x star-oscilloscope-<version>-x86_64.AppImage
 ./star-oscilloscope-<version>-x86_64.AppImage
@@ -67,7 +62,7 @@ chmod +x star-oscilloscope-<version>-x86_64.AppImage
   Without the rule the program starts with the simulator and says in the status bar that the rule is missing.
 - Without FUSE on the system, start the AppImage with `--appimage-extract-and-run`.
 
-**From source:** see [docs/building.md](docs/building.md).
+**Building from source:** see [building.md](docs/building.md).
 
 ## Using it
 
@@ -80,8 +75,8 @@ chmod +x star-oscilloscope-<version>-x86_64.AppImage
 
 ## Known hardware limits
 
-Measured on one ISDS205X; details and the comparison with the manufacturer's specifications are in
-[docs/measurements.md](docs/measurements.md) §14.
+Measured on my ISDS205X. Extra details and the comparison with the manufacturer's specifications are in
+[measurements.md](docs/measurements.md).
 
 - **Gain:** with the device's own calibration readings are about 6.5 % low. The gain wizard brings them within 0.2 % of a
   multimeter.
@@ -95,17 +90,17 @@ Measured on one ISDS205X; details and the comparison with the manufacturer's spe
   blocks of 256 with gaps; the program uses it only where that is enough.
 - **16 MSa/s:** a computer cannot always keep up with 32 MB/s; in captures longer than 64K samples a sample is lost now
   and then, so longer windows use 8 MSa/s.
-- **The good side:** timing, frequency and the match between the two channels (within 1 ns) are solid, and the errors
-  repeat, which is why calibration works.
+
+The good side: timing, frequency and the match between the two channels (within 1 ns) are solid, and the errors repeat, which is why calibration works.
 
 ## Documentation
 
 | Document | Content |
 |---|---|
-| [docs/building.md](docs/building.md) | Building, testing, packaging, the tools, how the protocol was worked out |
-| [docs/protocol.md](docs/protocol.md) | The USB protocol and the calibration model |
-| [docs/measurements.md](docs/measurements.md) | Measurements against known sources; the hardware's limits (§14) |
-| [docs/translating.md](docs/translating.md) | Translating the interface |
+| [building.md](docs/building.md) | Building, testing, packaging, the tools, how the protocol was worked out |
+| [protocol.md](docs/protocol.md) | The USB protocol and the calibration model |
+| [measurements.md](docs/measurements.md) | Measurements against known sources; the hardware's limits |
+| [translating.md](docs/translating.md) | Translating the interface |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Reporting problems, contributing code, measurements and translations |
 | [CHANGELOG.md](CHANGELOG.md) | What changed in each version |
 
@@ -120,19 +115,11 @@ Measured on one ISDS205X; details and the comparison with the manufacturer's spe
 | `tests/data/` | Golden data for the C++ tests |
 | `tools/` | Bench, recording and analysis tools; the Python reference driver `isds205x.py` |
 
-## Versions
-
-Versions are MAJOR.MINOR.PATCH: PATCH releases fix, MINOR releases add. 0.7.0 is the first public release; 1.0 will
-follow once the program has been used beyond the bench it was developed on.
-
 ## Licence
 
-Star Oscilloscope is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
-License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later
-version: **GPL-3.0-or-later**. The full text is in [LICENSE](LICENSE); every source file carries an SPDX identifier.
+Star Oscilloscope is free software. You can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version: **GPL-3.0-or-later**. The full text is in [LICENSE](LICENSE); every source file carries an SPDX identifier.
 The program comes WITHOUT ANY WARRANTY.
 
 Copyright © 2026 Necati Çakacı.
 
-The packages also carry Qt, libusb and other libraries under their own licences, listed in the packages. The
-manufacturer's SDK is not part of this project. Instrustar and the model names are trademarks of their owners.
+This project is not affiliated with Instrustar. Instrustar and the model names are trademarks of their owners. The packages also carry Qt, libusb and other libraries under their own licences, listed in the packages. 
