@@ -404,7 +404,8 @@ captured samples (DDS 2 Vpp, ×1 probe):
 
 - **The signal is not distorted; the drawing was.** At 48 MSa/s the samples lie on a clean sine up to 20 MHz, the
   residual at the level of noise and quantisation. Joining 5 points per period with straight lines makes a zigzag.
-  The manufacturer's software shows the same zigzag above 5 MHz.
+  The manufacturer's software shows the same zigzag above 5 MHz. It has an interpolation option (Spline or Sin, from
+  6 MHz), but with a 10 MHz sine at 100 ns/div neither made a visible difference.
 - **Applied:** sin(x)/x interpolation (8-tap, Lanczos-windowed sinc) when more than 3 pixels fall to a sample (View →
   Sin(x)/x Interpolation turns it off); 48 MSa/s at 500 ns/div; an orange ALIAS badge when the signal is above half the
   sample rate (a 10 MHz sine at 1 µs/div and 16 MSa/s showed 6 MHz).
