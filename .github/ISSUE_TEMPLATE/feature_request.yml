@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: Feature request
+description: Something the program should do.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What would you like
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: What would you use it for
+      description: The measurement or situation where you would need it.

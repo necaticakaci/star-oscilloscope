@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: Report from my device
+description: Tell how Star Oscilloscope works with your ISDS205 model, or share data from your unit.
+title: "Report: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Only the ISDS205X has been tried so far, so a report from any other model is very welcome — also when
+        everything works. Data from more units also tell whether the measured errors belong to one unit or to the model
+        (docs/measurements.md §8).
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      description: Exactly as shown in Acquire > Calibration… (Device), e.g. ISDS205A(1.1).
+    validations:
+      required: true
+  - type: input
+    id: setup
+    attributes:
+      label: Version, operating system and installation
+      placeholder: "0.7.0, Windows 10 zip / Debian 13 .deb / …"
+    validations:
+      required: true
+  - type: checkboxes
+    id: works
+    attributes:
+      label: What works
+      options:
+        - label: The program finds the device and shows signals
+        - label: The measurements look right
+        - label: The Spectrum tab works
+        - label: The generator works (ISDS205B and ISDS205X only)
+  - type: textarea
+    id: notes
+    attributes:
+      label: What did not work, or anything else you noticed
+  - type: textarea
+    id: descriptor
+    attributes:
+      label: Device information (optional)
+      description: |
+        With a build from source: the output of `isdsctl info`. You may remove the `id` line (your unit's serial
+        number); it is not needed.
+      render: text
+  - type: textarea
+    id: dc
+    attributes:
+      label: A DC comparison (optional)
+      description: |
+        A voltage measured with a multimeter (a battery, a bench supply) and what the program reads for it on two
+        scales, e.g. 200 mV/div and 500 mV/div, with the default calibration.

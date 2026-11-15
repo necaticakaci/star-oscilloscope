@@ -1,0 +1,63 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+name: Bug report
+description: Something does not work as it should.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting. The more of this you can fill in, the faster it can be found.
+  - type: dropdown
+    id: model
+    attributes:
+      label: Device
+      description: The model as shown in Acquire > Calibration… (Device).
+      options:
+        - ISDS205X
+        - ISDS205B
+        - ISDS205C
+        - ISDS205A
+        - ISDS205
+        - No device (simulator)
+        - Other or not sure
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Star Oscilloscope version
+      description: Help > About, or `star-oscilloscope --version`.
+      placeholder: "0.7.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: install
+    attributes:
+      label: Installed from
+      options:
+        - Windows zip
+        - .deb package
+        - AppImage
+        - Built from source
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Operating system
+      placeholder: "Windows 11 24H2 / Debian 13, GNOME on Wayland / …"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what happened instead. Screenshots help.
+    validations:
+      required: true
+  - type: textarea
+    id: message
+    attributes:
+      label: Messages
+      description: The status bar's message, if there was one; or the program's output when started from a terminal.
+      render: text
