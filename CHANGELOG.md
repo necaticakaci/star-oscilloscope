@@ -2,7 +2,7 @@
 
 Versions are MAJOR.MINOR.PATCH: PATCH releases fix, MINOR releases add.
 
-## 0.7.0 — first public release
+## 0.7.0 — 2026-11-16, first public release
 
 Oscilloscope software for the Instrustar ISDS205 series with its own USB driver, for Linux and Windows. Tested with the
 ISDS205X.
