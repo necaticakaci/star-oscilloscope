@@ -150,6 +150,12 @@ jobs:
         run: |
           (cd packages && sha256sum -- * > SHA256SUMS.txt)
           version=${GITHUB_REF_NAME#v}
-          awk -v v="$version" 'index($0, "## " v) == 1 { on = 1; next } /^## / { on = 0 } on' CHANGELOG.md > notes.md
+          # The version's section of the changelog. GitHub keeps line breaks in release notes, so the lines a paragraph
+          # or list item is wrapped into are joined back into one.
+          awk -v v="$version" 'index($0, "## " v) == 1 { on = 1; next } /^## / { on = 0 } on' CHANGELOG.md \
+            | awk '{ if ($0 != "" && prev != "" && $0 !~ /^[[:space:]]*(#+|[-*]|[0-9]+\.) /) { sub(/^[[:space:]]+/, ""); buf = buf " " $0 }
+                     else { if (NR > 1) print buf; buf = $0 }
+                     prev = $0 }
+                   END { print buf }' > notes.md
           gh release create "$GITHUB_REF_NAME" packages/* --repo "$GITHUB_REPOSITORY" --draft \
             --title "Star Oscilloscope $version" --notes-file notes.md
